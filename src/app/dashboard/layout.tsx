@@ -1,7 +1,6 @@
-// app/layout.tsx
 import { ReactNode } from 'react';
-import AppLayout from '../layouts/AppLayout';
-import './globals.css';
+import AppLayout from '../../layouts/AppLayout';
+import '../globals.css';
 
 
 export const metadata = {
@@ -14,7 +13,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <>
-          {children}
+          <AppLayout>{children}</AppLayout>
         </>
       </body>
     </html>
