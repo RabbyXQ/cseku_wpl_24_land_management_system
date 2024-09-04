@@ -12,18 +12,16 @@ type AppLayoutProps = {
 const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Sidebar */}
       
       <AppSider/>
 
-      {/* Main Layout */}
       <div className="flex-1 pl-16">
         
         
         
-        <header className="fixed top-0  w-full bg-[#77afe7] p-0">
-          <div className="flex items-center h-16 px-4">
-            <h1 className="text-white text-xl font-bold ml-4">Admin Panel</h1>
+        <header className="fixed top-0 h-14  w-full bg-[#198cf8] p-0">
+          <div className="flex  items-center p-7 h-10 px-4">
+            <h1 className="text-white text-xl font-bold ml-4">Daag</h1>
           </div>
         </header>
 
