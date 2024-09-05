@@ -8,6 +8,8 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+
 model User {
   id         Int     @id @default(autoincrement())
   username   String  @unique
@@ -23,3 +25,18 @@ model User {
   @@map("user")  
 }
 
+
+
+model Land {
+  id           Int      @id @default(autoincrement())
+  name         String
+  location     String
+  size         Float
+  owner        String
+  landType     Int      @default(0)  
+  marketValue  Float
+  notes        String?  @db.Text
+  polygons     Json    
+
+  @@map("land")  
+}
