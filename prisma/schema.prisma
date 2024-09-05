@@ -8,17 +8,18 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
 model User {
   id         Int     @id @default(autoincrement())
   username   String  @unique
   pass       String
+  role       Int     @default(1) 
   email      String  @unique
   firstName  String?
   lastName   String?
-  mobile     String?  // Nullable mobile field
-  age        Int?     // Nullable age field
-  occupation String?  // Nullable occupation field
+  mobile     String?  
+  age        Int?     
+  occupation String?  
    
-  @@map("user")  // Optional: Map to an existing table name if needed
+  @@map("user")  
 }
+
