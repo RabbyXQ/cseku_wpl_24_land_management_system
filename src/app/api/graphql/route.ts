@@ -2,6 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { gql } from 'graphql-tag';
 import { NextRequest, NextResponse } from 'next/server';
 
+
 const typeDefs = gql`
   type Query {
     hello: String
