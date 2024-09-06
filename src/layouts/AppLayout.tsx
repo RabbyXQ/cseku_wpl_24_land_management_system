@@ -67,7 +67,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         <AppSider />
 
         <div className="flex-1 pl-16">
-          <header className="fixed top-0 left-0 right-0 h-14 bg-green-900 flex items-center justify-between px-4 z-10">
+          <header className="fixed top-0 left-0 right-0 h-12 bg-green-900 flex items-center justify-between px-4 z-10">
             <div className="flex items-center ml-20 p-7 h-10 px-4">
               <FaMapMarked className='flex w-12 h-12 p-2' />
               <h1 className="text-white text-xl font-bold">Daag</h1>

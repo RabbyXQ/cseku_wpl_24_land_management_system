@@ -1,39 +1,48 @@
 import Link from 'next/link';
-import { HomeIcon, UserIcon, Cog6ToothIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import { usePathname } from 'next/navigation';
+import { FaBell, FaCartPlus, FaCircleNotch, FaCog, FaDollarSign, FaFacebookMessenger, FaHammer, FaHome, FaMap, FaQuestion, FaRss, FaShopify, FaShoppingBasket, FaStore, FaUser, FaUserCheck, FaUserCog, FaUserFriends, FaWallet } from 'react-icons/fa';
 
 const menuItems = [
-  { href: '/', icon: <HomeIcon className="h-6 w-6 text-gray-400" />, name: 'Home' },
-  { href: '/profile', icon: <UserIcon className="h-6 w-6 text-gray-400" />, name: 'Profile' },
+  { href: '/dashboard', icon: <FaRss className="h-6 w-6" />, name: 'Lands' },
+  { href: '/profile', icon: <FaUser className="h-6 w-6" />, name: 'Profile' },
+  { href: '/followings', icon: <FaUserFriends className="h-6 w-6" />, name: 'Followings' },
+  { href: '/lands', icon: <FaMap className="h-6 w-6" />, name: 'Lands' },
+  { href: '/market', icon: <FaStore className="h-6 w-6" />, name: 'Market' },
+  { href: '/bids', icon: <FaHammer className="h-6 w-6" />, name: 'Bids' },
+  { href: '/messages', icon: <FaFacebookMessenger className="h-6 w-6" />, name: 'Messages' },
+  { href: '/notifications', icon: <FaBell className="h-6 w-6" />, name: 'Notifications' },
   {
     href: '/settings',
-    icon: <Cog6ToothIcon className="h-6 w-6 text-gray-400" />,
+    icon: <FaCog className="h-6 w-6" />,
     name: 'Settings',
     subMenu: [
-      { href: '/settings/general', name: 'General', icon: <Cog6ToothIcon className="h-4 w-4 text-gray-400" /> },
-      { href: '/settings/privacy', name: 'Privacy', icon: <Cog6ToothIcon className="h-4 w-4 text-gray-400" /> }
+      { href: '/settings/general', name: 'General', icon: <FaCog className="h-4 w-4" /> },
+      { href: '/settings/privacy', name: 'Privacy', icon: <FaCog className="h-4 w-4" /> }
     ]
   },
   {
     href: '/help',
-    icon: <QuestionMarkCircleIcon className="h-6 w-6 text-gray-400" />,
+    icon: <FaQuestion className="h-6 w-6" />,
     name: 'Help',
     subMenu: [
-      { href: '/help/faq', name: 'FAQ', icon: <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" /> },
-      { href: '/help/contact', name: 'Contact', icon: <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" /> }
+      { href: '/help/faq', name: 'FAQ', icon: <FaQuestion className="h-4 w-4" /> },
+      { href: '/help/contact', name: 'Contact', icon: <FaQuestion className="h-4 w-4" /> }
     ]
   },
 ];
 
 const Sidebar = () => {
+  const pathname = usePathname(); // Get the current path
+
   return (
     <div className="fixed top-0 left-0 h-full w-16 bg-gray-800 text-white z-50 flex flex-col items-center">
       {menuItems.map((item, index) => (
         <div
           key={index}
-          className="relative flex items-center group w-16 h-12"
+          className={`relative flex items-center group w-16 h-12 ${pathname === item.href ? 'bg-blue-600' : ''}`}
         >
           {/* Background effect */}
-          <div className="absolute inset-0 bg-blue-600 transition-transform duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left z-0"></div>
+          <div className={`absolute inset-0 transition-transform duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left z-0 ${pathname === item.href ? 'bg-blue-600' : 'bg-gray-700'}`}></div>
 
           {/* Main icon link */}
           <div className="relative flex items-center justify-center w-16 h-16 z-10">
