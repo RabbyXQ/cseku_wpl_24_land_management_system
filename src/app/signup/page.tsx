@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaGoogle, FaGithub, FaFacebook } from 'react-icons/fa';
 import Link from 'next/link';
+import ThemeSwitcher from '@/components/ThemeSwitcher'; // Import the ThemeSwitcher component
+import { NextUIProvider, Button } from '@nextui-org/react';
 
 const SignupPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,10 +20,9 @@ const SignupPage: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Check if user is already logged in
     const token = localStorage.getItem('token');
     if (token) {
-      router.push('/dashboard'); // Redirect to dashboard if token exists
+      router.push('/dashboard');
     }
   }, [router]);
 
@@ -73,90 +74,93 @@ const SignupPage: React.FC = () => {
   };
 
   const handleSocialSignUp = (provider: string) => {
-    // Handle social sign up here
     console.log(`Sign up with ${provider}`);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 shadow-md rounded-lg">
-        <h1 className="text-3xl font-bold mb-6 text-center">Sign Up</h1>
+    <NextUIProvider>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 p-8 shadow-md rounded-lg">
+        <header className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white">Sign Up</h1>
+          <ThemeSwitcher /> {/* Add the ThemeSwitcher component */}
+        </header>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Username</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
             <input
               type="text"
               name="username"
               value={formData.username}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Retype Password</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Retype Password</label>
             <input
               type="password"
               name="retypePassword"
               value={formData.retypePassword}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:focus:ring-indigo-500"
             />
           </div>
-          <button
+          <Button
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             Sign Up
-          </button>
+          </Button>
         </form>
         <div className="mt-6 flex justify-center space-x-4">
-          <button
+          <Button
             onClick={() => handleSocialSignUp('Google')}
             className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
           >
             <FaGoogle size={24} className="text-[#DB4437]" />
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => handleSocialSignUp('GitHub')}
             className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
           >
             <FaGithub size={24} className="text-[#333]" />
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => handleSocialSignUp('Facebook')}
             className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
           >
             <FaFacebook size={24} className="text-[#4267B2]" />
-          </button>
+          </Button>
         </div>
         <div className="mt-4 text-center">
           <p className="text-sm">
             Already have an account?{' '}
-            <Link href="/login" className="text-indigo-600 hover:underline">
+            <Link href="/login" className="text-indigo-600 hover:underline dark:text-indigo-400">
               Login
             </Link>
           </p>
@@ -165,6 +169,7 @@ const SignupPage: React.FC = () => {
         {success && <p className="text-green-500 mt-2">{success}</p>}
       </div>
     </div>
+    </NextUIProvider>
   );
 };
 
