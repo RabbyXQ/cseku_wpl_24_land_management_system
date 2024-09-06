@@ -2,7 +2,7 @@ First create .env file at the cloned root directory
 ```
 DATABASE_URL="mysql://user:pass@host:port/databasename"
 DB_HOST=
-DB_USER=root
+DB_USER=
 DB_PASSWORD=
 JWT_SECRET=
 ```
