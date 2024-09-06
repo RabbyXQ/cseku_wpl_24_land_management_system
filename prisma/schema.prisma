@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,23 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id         Int     @id @default(autoincrement())
-  username   String  @unique
+  id         Int      @id @default(autoincrement())
+  username   String   @unique
   pass       String
-  role       Int     @default(1) 
-  email      String  @unique
+  role       Int      @default(1)
+  email      String   @unique
+  age        Int?
+  address    String?
   firstName  String?
   lastName   String?
-  mobile     String?  
-  age        Int?     
-  occupation String?  
-   
-  @@map("user")  
+  mobile     String?
+  dob        String?
+  occupation String?
+  avatar     String?
 }
-
-
 
 model Land {
   id           Int      @id @default(autoincrement())
@@ -33,10 +29,85 @@ model Land {
   location     String
   size         Float
   owner        String
-  landType     Int      @default(0)  
+  landType     Int      @default(0)
   marketValue  Float
   notes        String?  @db.Text
-  polygons     Json    
+  polygons     Json
+  createdBy    String
+  createdAt    DateTime @default(now())
+  updatedBy    String?
+  updatedAt    DateTime @updatedAt
+  history      Json?
 
-  @@map("land")  
+}
+
+model LandParticipator {
+  id         Int      @id @default(autoincrement())
+  name       String
+  relationId Int
+  landId     Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  createdBy  String
+  updatedBy  String?
+  history    Json?
+
+  // Relations removed
+}
+
+model MarketItem {
+  id         Int      @id @default(autoincrement())
+  landId     Int
+  createdBy  String
+  isActive   Boolean   @default(true)
+  updatedBy  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  history    Json?
+
+  // Relations removed
+}
+
+model Bid {
+  id          Int      @id @default(autoincrement())
+  landId      Int
+  bidAmount   Float
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  history     Json?
+
+  // Relations removed
+}
+
+model Notification {
+  id          Int      @id @default(autoincrement())
+  message     String
+  type        String
+  createdBy   String
+  isRead      Boolean   @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations removed
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  content    String
+  landId     Int
+  createdBy  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations removed
+}
+
+model Relation {
+  id         Int      @id @default(autoincrement())
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("relation")
 }

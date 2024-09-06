@@ -24,6 +24,7 @@
   "include": [
     "src/server.ts",  // Adjusted the path (removed leading slash)
     "next-env.d.ts", 
+    "types/**/*",
     "**/*.ts", 
     "**/*.tsx", 
     ".next/types/**/*.ts"

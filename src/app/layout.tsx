@@ -2,7 +2,7 @@
 import { ReactNode } from 'react';
 import AppLayout from '../layouts/AppLayout';
 import './globals.css';
-
+import { NextUIProvider } from '@nextui-org/react';
 
 export const metadata = {
   title: 'MyApp',
@@ -12,11 +12,16 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <>
+        
+
+          <body>
+
+    
           {children}
-        </>
-      </body>
+
+          </body>
+        
+      
     </html>
   );
 }
