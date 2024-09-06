@@ -1,13 +1,38 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaBell, FaCartPlus, FaCircleNotch, FaCog, FaDollarSign, FaFacebookMessenger, FaHammer, FaHome, FaMap, FaQuestion, FaRss, FaShopify, FaShoppingBasket, FaStore, FaUser, FaUserCheck, FaUserCog, FaUserFriends, FaWallet } from 'react-icons/fa';
+import { FaBell, FaCartPlus, FaCircleNotch, FaCog, FaDollarSign, FaFacebookMessenger, FaHammer, FaHandsHelping, FaHome, FaMap, FaMapMarked, FaMapMarkedAlt, FaQuestion, FaRss, FaShopify, FaShoppingBasket, FaStore, FaUser, FaUserCheck, FaUserCog, FaUserFriends, FaWallet } from 'react-icons/fa';
 
 const menuItems = [
   { href: '/dashboard', icon: <FaRss className="h-6 w-6" />, name: 'Lands' },
-  { href: '/profile', icon: <FaUser className="h-6 w-6" />, name: 'Profile' },
-  { href: '/followings', icon: <FaUserFriends className="h-6 w-6" />, name: 'Followings' },
-  { href: '/lands', icon: <FaMap className="h-6 w-6" />, name: 'Lands' },
-  { href: '/market', icon: <FaStore className="h-6 w-6" />, name: 'Market' },
+  { href: '/profile', 
+    icon: <FaUser className="h-6 w-6" />, 
+    name: 'Profile',
+    subMenu: [
+      { href: '/followers', name: 'Followers', icon: <FaUserFriends className="h-4 w-4" /> },
+      { href: '/followings', name: 'Followers', icon: <FaUserFriends className="h-4 w-4" /> },
+    ]
+  },
+  { href: '/participators', 
+    icon: <FaHandsHelping className="h-6 w-6" />, 
+    name: 'Participators',
+    subMenu: [
+      { href: '/participators/add', name: 'Add Participator', icon: <FaHandsHelping className="h-4 w-4" /> },
+    ]
+  },
+  { 
+    href: '/lands',
+    icon: <FaMap className="h-6 w-6" />, 
+    name: 'Lands',
+    subMenu: [
+      { href: '/lands/add', name: 'Add Land', icon: <FaMapMarked className="h-4 w-4" /> },
+      { href: '/lands/market-items', name: 'Add to Market', icon: <FaMapMarkedAlt className="h-4 w-4" /> }
+    ]
+  },
+  { 
+    href: '/market', 
+    icon: <FaStore className="h-6 w-6" />, 
+    name: 'Market' 
+  },
   { href: '/bids', icon: <FaHammer className="h-6 w-6" />, name: 'Bids' },
   { href: '/messages', icon: <FaFacebookMessenger className="h-6 w-6" />, name: 'Messages' },
   { href: '/notifications', icon: <FaBell className="h-6 w-6" />, name: 'Notifications' },
@@ -39,10 +64,10 @@ const Sidebar = () => {
       {menuItems.map((item, index) => (
         <div
           key={index}
-          className={`relative flex items-center group w-16 h-12 ${pathname === item.href ? 'bg-blue-600' : ''}`}
+          className={`relative flex items-center group w-16 h-12 ${pathname === item.href ? 'bg-green-100 text-black' : ''}`}
         >
           {/* Background effect */}
-          <div className={`absolute inset-0 transition-transform duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left z-0 ${pathname === item.href ? 'bg-blue-600' : 'bg-gray-700'}`}></div>
+          <div className={`absolute inset-0 transition-transform duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left z-0 ${pathname === item.href ? 'bg-green-500 dark:bg-green-700' : 'bg-gray-700'}`}></div>
 
           {/* Main icon link */}
           <div className="relative flex items-center justify-center w-16 h-16 z-10">
@@ -59,7 +84,7 @@ const Sidebar = () => {
               </div>
               <div className="max-h-60 overflow-y-auto">
                 {item.subMenu.map(sub => (
-                  <Link key={sub.href} href={sub.href} className="flex items-center px-4 py-2 hover:bg-blue-600 transition-colors duration-300">
+                  <Link key={sub.href} href={sub.href} className="flex items-center px-4 py-2 hover:bg-green-500  hover:bg-green-700 transition-colors duration-300">
                     {sub.icon}
                     <span className="ml-2">{sub.name}</span>
                   </Link>

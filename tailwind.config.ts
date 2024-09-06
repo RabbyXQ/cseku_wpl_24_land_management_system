@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: 'class',  // Move this outside of theme
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/layouts/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,7 +10,6 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    darkMode: 'class',
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -20,4 +20,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
