@@ -20,4 +20,4 @@ npm build
 npm start
 ```
 
-You also can use ther package managers.
+You also can use other package managers.
