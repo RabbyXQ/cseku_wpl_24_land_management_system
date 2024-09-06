@@ -8,12 +8,22 @@ type AppHeaderProps = {
   handleLogout: () => void;
 };
 
+type User = {
+  id: number;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  avatar: string | null;
+};
+
 const AppHeader: React.FC<AppHeaderProps> = ({ toggleTheme, handleLogout }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
- // Check localStorage and apply the saved theme on mount
-useEffect(() => {
+  // Check localStorage and apply the saved theme on mount
+  useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme === 'dark') {
       setIsDarkMode(true);
@@ -23,7 +33,7 @@ useEffect(() => {
       document.documentElement.classList.remove('dark');
     }
   }, []);
-  
+
   // Handle theme toggle and apply 'dark' class
   const handleThemeSwitch = () => {
     const newTheme = !isDarkMode ? 'dark' : 'light';
@@ -34,15 +44,39 @@ useEffect(() => {
       document.documentElement.classList.remove('dark');
     }
     localStorage.setItem('theme', newTheme);
-    toggleTheme();  // Optional for additional actions
+    toggleTheme(); // Optional for additional actions
   };
-  
+
   // Toggle dropdown
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
- 
+  // Fetch user data from API on component mount
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Retrieve token from localStorage or wherever you store it
+        const token = localStorage.getItem('token');
+        
+        // Add token to headers
+        const response = await fetch('/api/profile', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Use Bearer token for Authorization
+          }
+        });
+        
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data: User = await response.json();
+        setUser(data);
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 h-12 bg-green-500 dark:bg-green-800 flex items-center justify-between px-4 z-10">
@@ -60,7 +94,7 @@ useEffect(() => {
             <span className="sr-only">Open user menu</span>
             <img
               className="w-full h-full rounded-full object-cover"
-              src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" 
+              src={user?.avatar || 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg'} 
               alt="User Avatar"
             />
           </button>
@@ -68,11 +102,11 @@ useEffect(() => {
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-2">
               <div className="px-4 py-2">
-                <p className="font-bold text-gray-900 dark:text-white">John Doe</p>
-                <p className="text-sm text-gray-500 dark:text-gray-300">john.doe@example.com</p>
+                <p className="font-bold text-gray-900 dark:text-white">{user?.firstName} {user?.lastName}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-300">{user?.email}</p>
               </div>
               <a
-                href="#"
+                href="/profile/edit"
                 className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 Profile Settings

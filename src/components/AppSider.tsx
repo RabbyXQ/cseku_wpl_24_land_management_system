@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaBell, FaCartPlus, FaCircleNotch, FaCog, FaDollarSign, FaFacebookMessenger, FaHammer, FaHandsHelping, FaHome, FaMap, FaMapMarked, FaMapMarkedAlt, FaQuestion, FaRss, FaShopify, FaShoppingBasket, FaStore, FaUser, FaUserCheck, FaUserCog, FaUserFriends, FaWallet } from 'react-icons/fa';
+import { FaBell, FaCartPlus, FaCircleNotch, FaCog, FaDollarSign, FaFacebookMessenger, FaHammer, FaHandsHelping, FaHome, FaMap, FaMapMarked, FaMapMarkedAlt, FaMapMarker, FaMapSigns, FaQuestion, FaRss, FaShopify, FaShoppingBasket, FaStore, FaUser, FaUserCheck, FaUserCog, FaUserFriends, FaWallet } from 'react-icons/fa';
 
 const menuItems = [
   { href: '/dashboard', icon: <FaRss className="h-6 w-6" />, name: 'Lands' },
@@ -20,16 +20,17 @@ const menuItems = [
     ]
   },
   { 
-    href: '/lands',
+    href: '/dashboard/land',
     icon: <FaMap className="h-6 w-6" />, 
     name: 'Lands',
     subMenu: [
-      { href: '/lands/add', name: 'Add Land', icon: <FaMapMarked className="h-4 w-4" /> },
-      { href: '/lands/market-items', name: 'Add to Market', icon: <FaMapMarkedAlt className="h-4 w-4" /> }
+      { href: '/dashboard/land/add', name: 'Add Land', icon: <FaMapMarked className="h-4 w-4" /> },
+      { href: '/dashboard/land/calculate', name: 'Divide Land', icon: <FaMapSigns className="h-4 w-4" /> },
+      { href: '/dashboard/land/add-to-market', name: 'Add to Market', icon: <FaMapMarkedAlt className="h-4 w-4" /> }
     ]
   },
   { 
-    href: '/market', 
+    href: '/dashboard/market', 
     icon: <FaStore className="h-6 w-6" />, 
     name: 'Market' 
   },
@@ -84,7 +85,7 @@ const Sidebar = () => {
               </div>
               <div className="max-h-60 overflow-y-auto">
                 {item.subMenu.map(sub => (
-                  <Link key={sub.href} href={sub.href} className="flex items-center px-4 py-2 hover:bg-green-500  hover:bg-green-700 transition-colors duration-300">
+                  <Link key={sub.href} href={sub.href} className="flex items-center px-4 py-2 hover:bg-green-500  dark:hover:bg-green-700 transition-colors duration-300">
                     {sub.icon}
                     <span className="ml-2">{sub.name}</span>
                   </Link>

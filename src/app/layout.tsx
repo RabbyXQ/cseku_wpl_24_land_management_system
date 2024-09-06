@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import './globals.css';
 import { NextUIProvider } from '@nextui-org/react';
 import { Josefin_Sans, Roboto } from 'next/font/google';
+import AppLayout from '@/layouts/AppLayout';
 
 export const metadata = {
   title: 'MyApp',
@@ -18,7 +19,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
+        <NextUIProvider>
           {children}
+          </NextUIProvider>
       </body>
     </html>
   );
