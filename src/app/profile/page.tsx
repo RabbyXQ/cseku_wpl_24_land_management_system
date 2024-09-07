@@ -140,7 +140,7 @@ const ProfilePage = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => handleKeyDown(e, field)}
-              className="w-full p-2 border border-green-500 dark:border-green-700 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500 dark:focus:ring-green-700"
+              className="w-full p-2 border bg-gray-50 dark:bg-gray-500 text-gray-900 dark:text-gray-50 border-green-500 dark:border-green-700 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500 dark:focus:ring-green-700"
             />
           ) : (
             <p className="text-gray-900 dark:text-gray-100">{userData[field as keyof typeof userData]}</p>
@@ -181,7 +181,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-8">
+    <div className="max-w-4xl bg-white dark:bg-gray-900 mx-auto p-8">
       <h1 className="text-3xl font-bold mb-8">Profile</h1>
       <div className="flex items-center mb-8">
         <label htmlFor="avatar-upload" className="relative cursor-pointer">
@@ -233,7 +233,7 @@ const ProfilePage = () => {
               onClick={() => setActiveTab('followers')}
               className={`${
                 activeTab === 'followers' ? 'border-green-600 text-green-600 dark:border-green-700 dark:text-green-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              } py-4 px-6 border-b-2 font-medium text-sm`}
+              } py-4 px-6 border-b-2 font-medium text-md`}
             >
               Followers
             </button>
@@ -241,7 +241,7 @@ const ProfilePage = () => {
               onClick={() => setActiveTab('followings')}
               className={`${
                 activeTab === 'followings' ? 'border-green-600 text-green-600 dark:border-green-700 dark:text-green-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              } py-4 px-6 border-b-2 font-medium text-sm`}
+              } py-4 px-6 border-b-2 font-medium text-md`}
             >
               Followings
             </button>
