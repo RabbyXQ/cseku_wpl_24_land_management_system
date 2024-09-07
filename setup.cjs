@@ -11,7 +11,7 @@ async function createDatabase() {
   });
 
   try {
-    await connection.query('CREATE DATABASE IF NOT EXISTS daag');
+    await connection.query('CREATE DATABASE IF NOT EXISTS '+process.env.DB_NAME);
     console.log('Database "daag" created or already exists!');
   } catch (err) {
     console.error('Error creating database:', err);

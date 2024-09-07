@@ -1,10 +1,14 @@
 First create .env file at the cloned root directory
+
+put password in the dburl as hex for special characters for further ask chat-gpt
+
 ```
-DATABASE_URL="mysql://user:pass@host:port/databasename"
-DB_HOST=
-DB_USER=
-DB_PASSWORD=
-JWT_SECRET=
+DATABASE_URL="mysql://user:pass@host:port/dbname"
+DB_HOST=host
+DB_USER=user
+DB_NAME=dbname
+DB_PASSWORD=pass
+JWT_SECRET=secret-key
 ```
 
 then 
