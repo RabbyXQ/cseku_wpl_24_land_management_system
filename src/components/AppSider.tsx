@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaBell, FaCartPlus, FaCircleNotch, FaCog, FaDollarSign, FaFacebookMessenger, FaHammer, FaHandsHelping, FaHome, FaMap, FaMapMarked, FaMapMarkedAlt, FaMapMarker, FaMapSigns, FaQuestion, FaRss, FaShopify, FaShoppingBasket, FaStore, FaUser, FaUserCheck, FaUserCog, FaUserFriends, FaWallet, FaBars, FaTimes } from 'react-icons/fa';
+import { mark_script } from '@/utils/fonts';
 
 const menuItems = [
   { href: '/dashboard', icon: <FaRss className="h-6 w-6" />, name: 'Dashboard' },
@@ -44,8 +45,8 @@ const Sidebar = () => {
       <div className={`flex items-center px-4 transition-all duration-300 ${isOpen ? 'h-16' : 'h-14'}`}>
         {isOpen && (
           <>
-            <FaMapMarked className="text-white w-7 h-7" />
-            <h1 className="text-white text-xl font-bold ml-4">Daag</h1>
+            <FaMapMarkedAlt className="text-white w-7 h-7" />
+            <h1 className={mark_script.className.concat(" text-white text-3xl font-bold ml-4")}>Daag</h1>
           </>
         )}
       </div>

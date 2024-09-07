@@ -1,7 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { FaMapMarked } from 'react-icons/fa';
+import { FaMapMarked, FaMapMarkedAlt } from 'react-icons/fa';
+import { exo, exo_2, josefine, mark_script } from '@/utils/fonts';
+
 
 type AppHeaderProps = {
   toggleTheme: () => void;
@@ -79,10 +81,10 @@ const AppHeader: React.FC<AppHeaderProps> = ({ toggleTheme, handleLogout }) => {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-12 bg-green-500 dark:bg-green-800 flex items-center justify-between px-4 z-10">
+    <header className="fixed top-0 left-0 right-0 h-12 shadow-sm drop-shadow-2xl shadow-green-800 bg-green-500 dark:bg-green-800 flex items-center justify-between px-4 z-10">
       <div className="flex items-center ml-20 p-7 h-10 px-4">
-        <FaMapMarked className="text-white w-12 h-12 p-2" />
-        <h1 className="text-white text-xl font-bold">Daag</h1>
+        <FaMapMarkedAlt className="text-white w-12 h-12 p-2" />
+        <h1 className={mark_script.className.concat(` text-white text-3xl font-bold`)}>Daag</h1>
       </div>
       <div className="flex items-center gap-4">
         {/* Avatar Dropdown */}
