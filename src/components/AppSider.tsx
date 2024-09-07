@@ -53,13 +53,13 @@ const Sidebar = () => {
       {/* Toggle Button */}
       <button
         onClick={toggleSidebar}
-        className="absolute top-4 right-0 w-12 h-12 flex items-center justify-center text-white bg-gray-700 rounded-l-lg"
+        className="absolute right-0 w-12 h-12 flex items-center justify-center text-white bg-gray-700 rounded-l-lg"
       >
         {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
       </button>
 
       {/* Scrollable Icon Container */}
-      <div className="flex-1 overflow-y-auto mt-4">
+      <div className="flex-1 overflow-y-auto mt-0">
         {menuItems.map((item, index) => (
           <div
             key={index}

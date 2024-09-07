@@ -20,7 +20,7 @@ npm run dev
 
 To build
 ```
-npm build
+npm run build
 npm start
 ```
 
