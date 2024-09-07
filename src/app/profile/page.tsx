@@ -1,8 +1,7 @@
 'use client';
 
-import AppLayout from '@/layouts/AppLayout';
 import { useState, useEffect, KeyboardEvent } from 'react';
-import { FaPencilAlt, FaCheck, FaTimes, FaUpload, FaCamera, FaPushed } from 'react-icons/fa';
+import { FaPencilAlt, FaCheck, FaTimes, FaUpload, FaCamera } from 'react-icons/fa';
 
 const ProfilePage = () => {
   const [editingField, setEditingField] = useState<string | null>(null);
@@ -28,7 +27,6 @@ const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState<'followers' | 'followings'>('followers');
 
   useEffect(() => {
-    // Fetch the user data when the component mounts
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
@@ -68,7 +66,7 @@ const ProfilePage = () => {
   const handleSave = async (field: string) => {
     try {
       const token = localStorage.getItem('token');
-      const value = field === 'age' ? parseInt(inputValue, 10) : inputValue; // Ensure age is passed as an integer
+      const value = field === 'age' ? parseInt(inputValue, 10) : inputValue;
       const response = await fetch('/api/profile', {
         method: 'PUT',
         headers: {
@@ -92,7 +90,7 @@ const ProfilePage = () => {
 
     const formData = new FormData();
     formData.append('avatar', avatarFile);
-    formData.append('userId', userData.id); // Ensure userId is passed
+    formData.append('userId', userData.id);
 
     try {
       const token = localStorage.getItem('token');
@@ -131,140 +129,140 @@ const ProfilePage = () => {
 
   const renderField = (label: string, field: string, icon: JSX.Element, helperText?: string) => {
     return (
-      <div className="flex flex-col space-y-1 mb-6">
-        <div className="flex items-center space-x-4">
-          <div className="flex-shrink-0">
-            <p className="text-gray-900 dark:text-gray-300 font-small text-sm">{label}</p>
-          </div>
-          <div className="flex-1">
-            {editingField === field ? (
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={(e) => handleKeyDown(e, field)}
-                className="w-full p-0 border border-green-500 dark:border-green-700 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500 dark:focus:ring-green-700"
-              />
-            ) : (
-              <p className="text-gray-600 dark:text-gray-100">{userData[field as keyof typeof userData]}</p>
-            )}
-          </div>
-          <div className="flex items-center space-x-2">
-            {editingField === field ? (
-              <>
-                <button
-                  onClick={() => handleSave(field)}
-                  className="p-1 bg-green-500 rounded-full text-white hover:bg-green-600"
-                >
-                  <FaCheck className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={handleCancel}
-                  className="p-1 bg-red-500 rounded-full text-white hover:bg-red-600"
-                >
-                  <FaTimes className="h-5 w-5" />
-                </button>
-              </>
-            ) : (
-              <button
-                onClick={() => handleEdit(field)}
-                className="p-2 bg-gray-50 rounded-full hover:bg-gray-300"
-              >
-                {icon}
-              </button>
-            )}
-          </div>
+      <div className="flex items-center mb-6">
+        <div className="flex-shrink-0 w-1/3">
+          <p className="text-gray-500 dark:text-gray-300 font-medium text-sm">{label}</p>
         </div>
-        {helperText && (
-          <p className="text-sm text-gray-500">{helperText}</p>
-        )}
+        <div className="flex-1">
+          {editingField === field ? (
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e, field)}
+              className="w-full p-2 border border-green-500 dark:border-green-700 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500 dark:focus:ring-green-700"
+            />
+          ) : (
+            <p className="text-gray-900 dark:text-gray-100">{userData[field as keyof typeof userData]}</p>
+          )}
+        </div>
+        <div className="flex items-center space-x-2 ml-4">
+          {editingField === field ? (
+            <>
+              <button
+                onClick={() => handleSave(field)}
+                className="p-2 bg-green-500 rounded-full text-white hover:bg-green-600"
+              >
+                <FaCheck className="h-5 w-5" />
+              </button>
+              <button
+                onClick={handleCancel}
+                className="p-2 bg-red-500 rounded-full text-white hover:bg-red-600"
+              >
+                <FaTimes className="h-5 w-5" />
+              </button>
+            </>
+          ) : (
+            <>{helperText && (
+              <p className="text-xs text-gray-500">{helperText}</p>
+            )}
+            <button
+              onClick={() => handleEdit(field)}
+              className="p-2 bg-gray-50 rounded-full hover:bg-gray-300"
+            >
+              {icon}
+            </button>
+            </>
+          )}
+        </div>
+        
       </div>
     );
   };
 
   return (
-      <div className="max-w-4xl mx-auto p-8">
-        <h1 className="text-3xl font-bold mb-8">Profile</h1>
-        <div className="relative flex items-center mb-8">
-          <label htmlFor="avatar-upload" className="relative cursor-pointer">
-            <img
-              src={avatarPreview || 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg'}
-              alt="Avatar"
-              className="w-24 h-24 rounded-full object-cover"
-            />
-            <input
-              id="avatar-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="hidden"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <FaCamera className="h-8 w-8 text-gray-600 dark:text-gray-50 opacity-70 hover:opacity-100 transition-opacity" />
-            </div>
-          </label>
-          <div className="ml-6">
-            <p className="text-gray-900 dark:text-gray-50 text-xl font-semibold">Avatar</p>
-            <button
-              onClick={handleAvatarUpload}
-              className="mt-2 p-2 bg-green-500 rounded-full text-white hover:bg-gray-600"
-            >
-              <FaUpload className="h-5 w-5" />
-            </button>
+    <div className="max-w-4xl mx-auto p-8">
+      <h1 className="text-3xl font-bold mb-8">Profile</h1>
+      <div className="flex items-center mb-8">
+        <label htmlFor="avatar-upload" className="relative cursor-pointer">
+          <img
+            src={avatarPreview || 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg'}
+            alt="Avatar"
+            className="w-24 h-24 rounded-full object-cover"
+          />
+          <input
+            id="avatar-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <FaCamera className="h-8 w-8 text-gray-600 dark:text-gray-50 opacity-70 hover:opacity-100 transition-opacity" />
           </div>
-        </div>
-
-        <div className="space-y-6">
-          {renderField('First Name', 'firstName', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('Last Name', 'lastName', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('Email', 'email', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('Address', 'address', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('Mobile', 'mobile', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('Occupation', 'occupation', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('Age', 'age', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('Date of Birth', 'dob', <FaPencilAlt className="h-2 w-2 text-gray-500" />, 'dd/mm/yyyy')}
-          {renderField('Facebook', 'facebook', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('Twitter', 'twitter', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-          {renderField('LinkedIn', 'linkedIn', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
-        </div>
-
-        <div className="mt-8">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-4" aria-label="Tabs">
-              <button
-                onClick={() => setActiveTab('followers')}
-                className={`${
-                  activeTab === 'followers' ? 'border-green-600 text-green-600 dark:border-green-700 dark:text-green-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                } py-4 px-6 border-b-2 font-medium text-sm`}
-              >
-                Followers
-              </button>
-              <button
-                onClick={() => setActiveTab('followings')}
-                className={`${
-                  activeTab === 'followings' ? 'border-green-600 text-green-600 dark:border-green-700 dark:text-green-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                } py-4 px-6 border-b-2 font-medium text-sm`}
-              >
-                Followings
-              </button>
-            </nav>
-          </div>
-
-          <div className="mt-4">
-            {activeTab === 'followers' ? (
-              <div>
-                {/* Replace this with your followers content */}
-                <p>List of followers goes here...</p>
-              </div>
-            ) : (
-              <div>
-                {/* Replace this with your followings content */}
-                <p>List of followings goes here...</p>
-              </div>
-            )}
-          </div>
+        </label>
+        <div className="ml-6">
+          <p className="text-gray-900 dark:text-gray-50 text-xl font-semibold">Avatar</p>
+          <button
+            onClick={handleAvatarUpload}
+            className="mt-2 p-2 bg-green-500 rounded-full text-white hover:bg-gray-600"
+          >
+            <FaUpload className="h-5 w-5" />
+          </button>
         </div>
       </div>
+
+      <div className="space-y-6">
+        {renderField('First Name', 'firstName', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('Last Name', 'lastName', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('Email', 'email', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('Address', 'address', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('Mobile', 'mobile', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('Occupation', 'occupation', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('Age', 'age', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('Date of Birth', 'dob', <FaPencilAlt className="h-5 w-5 text-gray-700" />, 'dd/mm/yyyy')}
+        {renderField('Facebook', 'facebook', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('Twitter', 'twitter', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+        {renderField('LinkedIn', 'linkedIn', <FaPencilAlt className="h-5 w-5 text-gray-700" />)}
+      </div>
+
+      <div className="mt-8">
+        <div className="border-b border-gray-200">
+          <nav className="flex space-x-4" aria-label="Tabs">
+            <button
+              onClick={() => setActiveTab('followers')}
+              className={`${
+                activeTab === 'followers' ? 'border-green-600 text-green-600 dark:border-green-700 dark:text-green-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } py-4 px-6 border-b-2 font-medium text-sm`}
+            >
+              Followers
+            </button>
+            <button
+              onClick={() => setActiveTab('followings')}
+              className={`${
+                activeTab === 'followings' ? 'border-green-600 text-green-600 dark:border-green-700 dark:text-green-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } py-4 px-6 border-b-2 font-medium text-sm`}
+            >
+              Followings
+            </button>
+          </nav>
+        </div>
+
+        <div className="mt-4">
+          {activeTab === 'followers' ? (
+            <div>
+              {/* Replace this with your followers content */}
+              <p>List of followers goes here...</p>
+            </div>
+          ) : (
+            <div>
+              {/* Replace this with your followings content */}
+              <p>List of followings goes here...</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

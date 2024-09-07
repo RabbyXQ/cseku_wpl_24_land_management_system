@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@nextui-org/react';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 const ThemeSwitcher: React.FC = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -22,12 +23,12 @@ const ThemeSwitcher: React.FC = () => {
   };
 
   return (
-    <Button
+    <button
       onClick={toggleTheme}
-      className="bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      className="text-white py-2 px-4"
     >
-      Toggle Theme
-    </Button>
+      {theme == "light" ? (<FaMoon className='flex rounded-md text-gray-700 w-6 h-6'/>) : (<FaSun className='flex rounded-md text-orange-200 w-6 h-6'/>)}
+    </button>
   );
 };
 
