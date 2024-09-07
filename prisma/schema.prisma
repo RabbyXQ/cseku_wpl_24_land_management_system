@@ -18,9 +18,12 @@ model User {
   firstName  String?
   lastName   String?
   mobile     String?
-  dob        String?
+  dob        DateTime?
   occupation String?
   avatar     String?
+  facebook   String?
+  twitter    String?
+  linkedIn   String?
 }
 
 model Land {
