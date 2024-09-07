@@ -28,6 +28,5 @@ You also can use other package managers.
 
 ## Profile
 
-![https://github.com/RabbyXQ/cseku_wpl_24_land_management_system/blob/28dd021cdc0eaed8a5b25ffab4c159b2c8cb18ee/Screenshot%202024-09-07%20at%203.10.39%E2%80%AFPM.png](https://github.com/RabbyXQ/cseku_wpl_24_land_management_system/blob/28dd021cdc0eaed8a5b25ffab4c159b2c8cb18ee/Screenshot%202024-09-07%20at%203.10.39%E2%80%AFPM.png)
-
-![https://github.com/RabbyXQ/cseku_wpl_24_land_management_system/blob/3d694b38bc702cb206b208c7205258023fa05f2c/Screenshot%202024-09-07%20at%203.10.47%E2%80%AFPM.png](https://github.com/RabbyXQ/cseku_wpl_24_land_management_system/blob/3d694b38bc702cb206b208c7205258023fa05f2c/Screenshot%202024-09-07%20at%203.10.47%E2%80%AFPM.png)
+<img width="1440" alt="Screenshot 2024-09-08 at 12 38 16 AM" src="https://github.com/user-attachments/assets/667025f4-3d0b-40e6-8be7-358ddea50d2a"/>
+<img width="1440" alt="Screenshot 2024-09-08 at 12 39 59 AM" src="https://github.com/user-attachments/assets/eb15ba44-b4c0-47a2-acc8-1ff62a22dc67">
