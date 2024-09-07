@@ -2,7 +2,7 @@
 
 import AppLayout from '@/layouts/AppLayout';
 import { useState, useEffect, KeyboardEvent } from 'react';
-import { FaPencilAlt, FaCheck, FaTimes, FaUpload, FaCamera } from 'react-icons/fa';
+import { FaPencilAlt, FaCheck, FaTimes, FaUpload, FaCamera, FaPushed } from 'react-icons/fa';
 
 const ProfilePage = () => {
   const [editingField, setEditingField] = useState<string | null>(null);
@@ -134,7 +134,7 @@ const ProfilePage = () => {
       <div className="flex flex-col space-y-1 mb-6">
         <div className="flex items-center space-x-4">
           <div className="flex-shrink-0">
-            <p className="text-gray-900 font-medium text-lg">{label}</p>
+            <p className="text-gray-900 dark:text-gray-300 font-small text-sm">{label}</p>
           </div>
           <div className="flex-1">
             {editingField === field ? (
@@ -143,10 +143,10 @@ const ProfilePage = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => handleKeyDown(e, field)}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-0 border border-green-500 dark:border-green-700 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500 dark:focus:ring-green-700"
               />
             ) : (
-              <p className="text-gray-600">{userData[field as keyof typeof userData]}</p>
+              <p className="text-gray-600 dark:text-gray-100">{userData[field as keyof typeof userData]}</p>
             )}
           </div>
           <div className="flex items-center space-x-2">
@@ -154,13 +154,13 @@ const ProfilePage = () => {
               <>
                 <button
                   onClick={() => handleSave(field)}
-                  className="p-2 bg-green-500 rounded-full text-white hover:bg-green-600"
+                  className="p-1 bg-green-500 rounded-full text-white hover:bg-green-600"
                 >
                   <FaCheck className="h-5 w-5" />
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="p-2 bg-red-500 rounded-full text-white hover:bg-red-600"
+                  className="p-1 bg-red-500 rounded-full text-white hover:bg-red-600"
                 >
                   <FaTimes className="h-5 w-5" />
                 </button>
@@ -168,7 +168,7 @@ const ProfilePage = () => {
             ) : (
               <button
                 onClick={() => handleEdit(field)}
-                className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
+                className="p-2 bg-gray-50 rounded-full hover:bg-gray-300"
               >
                 {icon}
               </button>
@@ -201,14 +201,14 @@ const ProfilePage = () => {
               className="hidden"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-              <FaCamera className="h-8 w-8 text-gray-600 opacity-70 hover:opacity-100 transition-opacity" />
+              <FaCamera className="h-8 w-8 text-gray-600 dark:text-gray-50 opacity-70 hover:opacity-100 transition-opacity" />
             </div>
           </label>
           <div className="ml-6">
-            <p className="text-gray-900 text-xl font-semibold">Avatar</p>
+            <p className="text-gray-900 dark:text-gray-50 text-xl font-semibold">Avatar</p>
             <button
               onClick={handleAvatarUpload}
-              className="mt-2 p-2 bg-blue-500 rounded-full text-white hover:bg-blue-600"
+              className="mt-2 p-2 bg-green-500 rounded-full text-white hover:bg-gray-600"
             >
               <FaUpload className="h-5 w-5" />
             </button>
@@ -216,17 +216,17 @@ const ProfilePage = () => {
         </div>
 
         <div className="space-y-6">
-          {renderField('First Name', 'firstName', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('Last Name', 'lastName', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('Email', 'email', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('Address', 'address', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('Mobile', 'mobile', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('Occupation', 'occupation', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('Age', 'age', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('Date of Birth', 'dob', <FaPencilAlt className="h-5 w-5 text-gray-500" />, 'dd/mm/yyyy')}
-          {renderField('Facebook', 'facebook', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('Twitter', 'twitter', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
-          {renderField('LinkedIn', 'linkedIn', <FaPencilAlt className="h-5 w-5 text-gray-500" />)}
+          {renderField('First Name', 'firstName', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('Last Name', 'lastName', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('Email', 'email', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('Address', 'address', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('Mobile', 'mobile', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('Occupation', 'occupation', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('Age', 'age', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('Date of Birth', 'dob', <FaPencilAlt className="h-2 w-2 text-gray-500" />, 'dd/mm/yyyy')}
+          {renderField('Facebook', 'facebook', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('Twitter', 'twitter', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
+          {renderField('LinkedIn', 'linkedIn', <FaPencilAlt className="h-2 w-2 text-gray-500" />)}
         </div>
 
         <div className="mt-8">
@@ -235,7 +235,7 @@ const ProfilePage = () => {
               <button
                 onClick={() => setActiveTab('followers')}
                 className={`${
-                  activeTab === 'followers' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  activeTab === 'followers' ? 'border-green-600 text-green-600 dark:border-green-700 dark:text-green-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 } py-4 px-6 border-b-2 font-medium text-sm`}
               >
                 Followers
@@ -243,7 +243,7 @@ const ProfilePage = () => {
               <button
                 onClick={() => setActiveTab('followings')}
                 className={`${
-                  activeTab === 'followings' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  activeTab === 'followings' ? 'border-green-600 text-green-600 dark:border-green-700 dark:text-green-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 } py-4 px-6 border-b-2 font-medium text-sm`}
               >
                 Followings

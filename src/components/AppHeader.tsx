@@ -106,10 +106,10 @@ const AppHeader: React.FC<AppHeaderProps> = ({ toggleTheme, handleLogout }) => {
                 <p className="text-sm text-gray-500 dark:text-gray-300">{user?.email}</p>
               </div>
               <a
-                href="/profile/edit"
+                href="/profile"
                 className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                Profile Settings
+                Profile
               </a>
               <div className="px-4 py-2 flex items-center justify-between">
                 <span className="text-sm text-gray-700 dark:text-gray-200">Dark Mode</span>
