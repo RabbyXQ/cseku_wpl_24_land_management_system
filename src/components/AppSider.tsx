@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaBell, FaCartPlus, FaCircleNotch, FaCog, FaDollarSign, FaFacebookMessenger, FaHammer, FaHandsHelping, FaHome, FaMap, FaMapMarked, FaMapMarkedAlt, FaMapMarker, FaMapSigns, FaQuestion, FaRss, FaShopify, FaShoppingBasket, FaStore, FaUser, FaUserCheck, FaUserCog, FaUserFriends, FaWallet, FaBars, FaTimes } from 'react-icons/fa';
 
 const menuItems = [
-  { href: '/dashboard', icon: <FaRss className="h-6 w-6" />, name: 'Lands' },
+  { href: '/dashboard', icon: <FaRss className="h-6 w-6" />, name: 'Dashboard' },
   { href: '/profile', icon: <FaUser className="h-6 w-6" />, name: 'Profile' },
   { href: '/connections', icon: <FaUserFriends className="h-6 w-6" />, name: 'Connections' },
   { href: '/participators', icon: <FaHandsHelping className="h-6 w-6" />, name: 'Participators' },
@@ -19,7 +19,20 @@ const menuItems = [
 
 const Sidebar = () => {
   const pathname = usePathname(); // Get the current path
-  const [isOpen, setIsOpen] = useState(true); // State for sidebar visibility
+  const [isOpen, setIsOpen] = useState(false); // State for sidebar visibility
+
+  useEffect(() => {
+    // Retrieve the sidebar state from localStorage
+    const savedState = localStorage.getItem('sidebarOpen');
+    if (savedState) {
+      setIsOpen(JSON.parse(savedState));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save the sidebar state to localStorage
+    localStorage.setItem('sidebarOpen', JSON.stringify(isOpen));
+  }, [isOpen]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);

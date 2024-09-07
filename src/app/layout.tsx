@@ -2,13 +2,8 @@
 import { ReactNode } from 'react';
 import './globals.css';
 import { NextUIProvider } from '@nextui-org/react';
-import { Josefin_Sans, Roboto } from 'next/font/google';
-import AppLayout from '@/layouts/AppLayout';
-
-export const metadata = {
-  title: 'MyApp',
-  description: 'A description of MyApp',
-};
+import { Josefin_Sans } from 'next/font/google';
+import LayoutProvider from '@/components/LayoutProvider';
 
 const roboto = Josefin_Sans({
   subsets: ['latin'],
@@ -20,8 +15,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={roboto.className}>
         <NextUIProvider>
-          {children}
-          </NextUIProvider>
+          <LayoutProvider>{children}</LayoutProvider>
+        </NextUIProvider>
       </body>
     </html>
   );
