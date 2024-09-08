@@ -32,7 +32,7 @@ model Land {
   location     String
   size         Float
   owner        String
-  landType     Int      @default(0)
+  landType     String?
   marketValue  Float
   notes        String?  @db.Text
   polygons     Json
@@ -44,19 +44,30 @@ model Land {
 
 }
 
-model LandParticipator {
-  id         Int      @id @default(autoincrement())
+model Participator{
+  id      Int     @id @default(autoincrement())
   name       String
-  relationId Int
-  landId     Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  createdBy  String
-  updatedBy  String?
-  history    Json?
-
-  // Relations removed
+  relation String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  createdBy      String
+  updatedBy      String?
+  history        Json?
 }
+
+
+model LandParticipator {
+  id             Int      @id @default(autoincrement())
+  landId         Int
+  participatorId Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  createdBy      String
+  updatedBy      String?
+  history        Json?
+}
+
+
 
 model MarketItem {
   id         Int      @id @default(autoincrement())
@@ -67,50 +78,48 @@ model MarketItem {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   history    Json?
-
-  // Relations removed
 }
 
 model Bid {
   id          Int      @id @default(autoincrement())
-  landId      Int
+  marketItemId      Int
   bidAmount   Float
   createdBy   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   history     Json?
-
-  // Relations removed
 }
 
 model Notification {
   id          Int      @id @default(autoincrement())
   message     String
   type        String
+  recievedBy  String
   createdBy   String
   isRead      Boolean   @default(false)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations removed
 }
 
 model Comment {
   id         Int      @id @default(autoincrement())
   content    String
-  landId     Int
+  marketItemId     Int
   createdBy  String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-
-  // Relations removed
 }
 
-model Relation {
-  id         Int      @id @default(autoincrement())
-  name       String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+model Connection{
+  id          Int   @id @default(autoincrement())
+  follower String
+  folowed String
+}
 
-  @@map("relation")
+
+model Message{
+  id Int      @id         @default(autoincrement())
+  sender String
+  reciever String
+  message String
+  sentAt  DateTime @default(now())
 }
