@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
+
+
 const logHistory = (action: string, userId: string, data: any) => {
   return {
     action,
@@ -13,6 +15,8 @@ const logHistory = (action: string, userId: string, data: any) => {
     details: data,
   };
 };
+
+
 
 export async function GET(req: Request) {
   const token = req.headers.get('Authorization')?.replace('Bearer ', '');
