@@ -1,3 +1,5 @@
+Go to Wiki: https://github.com/RabbyXQ/Daag/wiki [Documentation]
+
 First create .env file at the cloned root directory
 
 put password in the dburl as hex for special characters for further ask chat-gpt
